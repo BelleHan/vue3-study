@@ -21,10 +21,10 @@
         </div>
         <div>
             <button 
-            class="btn btn-danger btn-sm"
-            @click="deleteTodo(index)"
+                class="btn btn-danger btn-sm"
+                @click="deleteTodo(index)"
             >
-            Delete
+                Delete
             </button>
         </div>
         </div>
@@ -44,8 +44,13 @@ export default {
             context.emit('toggle-todo', index);
         };
 
+        const deleteTodo = (index) => {
+            context.emit('delete-todo', index);
+        }
+
         return {
             toggleTodo,
+            deleteTodo,
         }
     }
 }

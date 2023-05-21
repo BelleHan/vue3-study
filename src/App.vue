@@ -11,7 +11,7 @@
     <TodoSimpleForm @add-todo="addTodo"/>
     
     <div v-if="!filteredTodos.length">
-      There is nothing to display
+      There is nothing to displ
     </div>
     <TodoList 
       :todos="filteredTodos" 

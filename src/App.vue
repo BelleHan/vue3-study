@@ -1,19 +1,20 @@
 <template>
   <div class="container">
-    <h4>count: {{ count }}</h4>
-    <h4>double count coumputed: {{ doubleCountCoumputed }}</h4> 
-    <h4>double count coumputed: {{ doubleCountCoumputed }}</h4> 
-    <h4>double count method: {{ doubleCountMethod() }}</h4>
-    <h4>double count method: {{ doubleCountMethod() }}</h4>
-    <button @click="count++">Add One</button>
     <h2>To-Do List</h2>
+    <input 
+      class="form-control"
+      type="text" 
+      v-model="searchText"
+      placeholder="Search"
+    >
+    <hr />
     <TodoSimpleForm @add-todo="addTodo"/>
     
-    <div v-if="!todos.length">
-      추가된 Todo가 없습니다
+    <div v-if="!filteredTodos.length">
+      There is nothing to display
     </div>
     <TodoList 
-      :todos="todos" 
+      :todos="filteredTodos" 
       @toggle-Todo="toggleTodo"
       @delete-todo="deleteTodo"
     />
@@ -52,16 +53,16 @@ export default {
       console.log(todos.value[index]);
     };
 
-    const count = ref(1);
-    const doubleCountCoumputed = computed(() => {
-      console.log('computed');
-      return count.value * 2;
-    });
+    const searchText = ref('');
+    const filteredTodos = computed(() => {
+      if (searchText.value) {
+        return todos.value.filter(todo => {
+          return todo.subject.includes(searchText.value);
+        });
+      }
 
-    const doubleCountMethod = () => {
-      console.log('method');
-      return count.value * 2;
-    };
+      return todos.value;
+    });
  
     return {
       todos,
@@ -69,9 +70,8 @@ export default {
       todoStyle,
       deleteTodo,
       toggleTodo,
-      count,
-      doubleCountCoumputed,
-      doubleCountMethod,
+      searchText,
+      filteredTodos,
     };
   }
 }

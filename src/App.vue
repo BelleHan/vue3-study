@@ -11,11 +11,11 @@
     <TodoSimpleForm @add-todo="addTodo"/>
     <div style="color: red">{{ error }}</div>
     
-    <div v-if="!filteredTodos.length">
+    <div v-if="!todos.length">
       There is nothing to display
     </div>
     <TodoList 
-      :todos="filteredTodos" 
+      :todos="todos" 
       @toggle-Todo="toggleTodo"
       @delete-todo="deleteTodo"
     />
@@ -61,10 +61,7 @@ export default {
     const numberOfTodos = ref(0);
     let limit = 5;
     const currentPage = ref(1);
-
-    watch([currentPage, numberOfTodos], (currentPage, prev) => {
-      console.log(currentPage, prev);
-    });
+    const searchText = ref('');
 
     const numberOfPages = computed(() => {
       return Math.ceil(numberOfTodos.value/limit);
@@ -74,7 +71,7 @@ export default {
       currentPage.value = page;
       try {
         const res = await axios.get(
-          `http://localhost:3000/todos?_page=${page}&_limit=${limit}`
+          `http://localhost:3000/todos?subject_like=${searchText.value}&_page=${page}&_limit=${limit}`
         );
         numberOfTodos.value = res.headers['x-total-count'];
         todos.value = res.data;
@@ -128,16 +125,18 @@ export default {
       }
     };
 
-    const searchText = ref('');
-    const filteredTodos = computed(() => {
-      if (searchText.value) {
-        return todos.value.filter(todo => {
-          return todo.subject.includes(searchText.value);
-        });
-      }
-
-      return todos.value;
+    watch(searchText, () => {
+      getTodos(1);
     });
+    // const filteredTodos = computed(() => {
+    //   if (searchText.value) {
+    //     return todos.value.filter(todo => {
+    //       return todo.subject.includes(searchText.value);
+    //     });
+    //   }
+
+    //   return todos.value;
+    // });
  
     return {
       todos,
@@ -145,7 +144,7 @@ export default {
       deleteTodo,
       toggleTodo,
       searchText,
-      filteredTodos,
+      // filteredTodos,
       error,
       numberOfPages,
       currentPage,

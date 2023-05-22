@@ -24,18 +24,19 @@
 
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li v-if="currentPage !== 1" class="page-item">
+        <li class="page-item">
           <a class="page-link" href="#">Previous</a>
         </li>
-        <li 
-          v-for="page in numberOfPages"
-          :key="page"
-          class="page-item"
-          :class="currentPage === page ? 'active' : ''"
-        >      
-          <a class="page-link" href="#">{{page}}</a>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
         </li>
-        <li v-if="numberOfPages !== currentPage" class="page-item">
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
           <a class="page-link" href="#">Next</a>
         </li>
       </ul>
@@ -58,20 +59,16 @@ export default {
   setup() {
     const todos = ref([]);
     const error = ref('');
-    const numberOfTodos = ref(0);
+    const totalPage = ref(0);
     const limit = 5;
-    const currentPage = ref(1);
-
-    const numberOfPages = computed(() => {
-      return Math.ceil(numberOfTodos.value/limit);
-    });
+    const page = ref(1);
 
     const getTodos = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3000/todos?_page=${currentPage.value}&_limit=${limit}`
+          `http://localhost:3000/todos?_page=${page.value}&_limit=${limit}`
         );
-        numberOfTodos.value = res.headers['x-total-count'];
+        totalPage.value = res.headers['x-total-count'];
         todos.value = res.data;
       } catch (err) {
         console.log(err);
@@ -142,8 +139,6 @@ export default {
       searchText,
       filteredTodos,
       error,
-      numberOfPages,
-      currentPage,
     };
   }
 }

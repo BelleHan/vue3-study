@@ -41,6 +41,7 @@ export default {
     const addTodo = (todo) => {
       // 데이터베이스 투두를 저장
       error.value = '';
+      console.log('start');
       axios.post('http://localhost:3000/todos', {
         subject: todo.subject,
         completed: todo.completed,
@@ -51,6 +52,7 @@ export default {
         console.log(err);
         error.value = 'Something went wrong.';
       });
+      console.log('hello');
     };
 
     const deleteTodo = (index) => {

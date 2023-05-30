@@ -31,14 +31,16 @@ export default createStore({
             // showToast.value = true;
             commit('UPDATE_TOAST_STATUS', true)
 
-            timeout.value = setTimeout(() => {
+            const timeout = setTimeout(() => {
             //   toastMessage.value = '';
               commit('UPDATE_TOAST_STATUS', '')
               toastAlertType.value = '';
               commit('UPDATE_TOAST_ALERT_TYPE', '')
               showToast.value = false;
               commit('UPDATE_TOAST_STATUS', false)
-            }, 3000)
+            }, 5000)
+
+            commit('UPDATE_TOAST_TIMEOUT', timeout);
         }
     }
 })

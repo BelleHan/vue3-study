@@ -7,28 +7,23 @@
     },
     {
       "subject": "clean my room",
-      "completed": false,
+      "completed": true,
       "id": 5
     },
     {
       "subject": "study vuejs",
-      "completed": false,
+      "completed": true,
       "id": 6
     },
     {
       "subject": "1",
-      "completed": false,
+      "completed": true,
       "id": 7
     },
     {
       "subject": "4",
       "completed": true,
       "id": 10
-    },
-    {
-      "subject": "6dfsffd",
-      "completed": true,
-      "id": 12
     },
     {
       "subject": "buy milk",

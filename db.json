@@ -41,45 +41,10 @@
       "id": 12
     },
     {
-      "subject": "71dfgfdg",
-      "completed": false,
-      "id": 13
-    },
-    {
       "subject": "buy milk",
       "completed": false,
       "body": "buy milk at supermarket",
       "id": 14
-    },
-    {
-      "subject": "dfsdfdf",
-      "completed": false,
-      "body": "sdfsdfdfd",
-      "id": 15
-    },
-    {
-      "subject": "sds",
-      "completed": false,
-      "body": "sdsd",
-      "id": 16
-    },
-    {
-      "subject": "sdsdsd",
-      "completed": true,
-      "body": "sdsd",
-      "id": 17
-    },
-    {
-      "subject": "12312",
-      "completed": false,
-      "body": "12121244dfdfss",
-      "id": 18
-    },
-    {
-      "subject": "sdsdsd",
-      "completed": false,
-      "body": "",
-      "id": 20
     }
   ]
 }
